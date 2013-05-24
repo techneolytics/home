@@ -1,0 +1,33 @@
+Index.php
+
+include() and require() are identical except that require will initiate a fatal error if the () element is not found while include will give a warning and continue running.  Apparently adding the _once suffix to either will run that only once.  I Hypothesize the client will try multiple times to initiate the function call.
+
+index.php simply includes the Controller (Controller.php) and creates an instance of the Controller i.e.
+
+$controller = new Controller(); #The function defined in Controller.php
+$controller = invoke(); #Invoke appears to be a command to initiate the function.  If you take this out you get nothing.  Therefore a function can be instantiated but will not run unless invoked.
+
+Thus, the index.php file is just an entryway or access point to the Controller.  It hands off all the work to the controller via the code below:
+
+<?php 
+	include_once("controller/Controller.php");
+
+	$controller = new Controller();
+	$controller->invoke();
+
+?>
+
+Controller.php
+
+private vs. public vs. protected - I think these are similar to local and global variables in Perl.  public variables are available to the total program and may be used to pass information from one class to another.  Private variables function only within a given class and cannot be passed outside an object. Protected variables are those that would be given values that need to be encrypted (usernames, passwords, etc).
+
+
+_construct() - php.net documentation states "PHP 5 allows developers to declare constructor methods for classes. Classes which have a constructor method call this method on each newly-created object, so it is suitable for any initialization that the object may need before it is used."
+
+constructor.php
+
+This is a good example of how you can have parent/child classes and how methods/functions can be inherited through each.  If you have a child class that defines its own __construct() then in order to call a method from the parent class you must use parent::__construct().
+
+destructor.php
+
+Just a simple script showing the life and death of an object class.
